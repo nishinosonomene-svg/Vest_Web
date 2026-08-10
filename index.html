@@ -1,317 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>海外广告素材标签看板</title>
-<style>
-  :root{
-    --surface-2:#ffffff; --surface-1:#f7f6f3; --surface-0:#f1efe8;
-    --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#898781;
-    --border:#e1e0d9; --border-strong:#c3c2b7; --border-accent:#2a78d6;
-    --bg-accent:#e6f1fb; --text-accent:#185fa5; --radius:8px;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --surface-2:#1a1a19; --surface-1:#242422; --surface-0:#141413;
-      --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#898781;
-      --border:#2c2c2a; --border-strong:#383835; --border-accent:#3987e5;
-      --bg-accent:#0c447c; --text-accent:#b5d4f4;
-    }
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; padding:24px; background:var(--surface-0); color:var(--text-primary);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
-    max-width:760px; margin:0 auto;
-  }
-  h1{font-size:20px;font-weight:500;margin:0 0 4px;}
-  .subtitle{font-size:13px;color:var(--text-muted);margin:0 0 24px;}
-  .card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;}
-  button{
-    padding:6px 14px;font-size:13px;border-radius:var(--radius);border:0.5px solid var(--border-strong);
-    background:transparent;color:var(--text-primary);cursor:pointer;font-family:inherit;
-  }
-  button.active{border-color:var(--border-accent);background:var(--bg-accent);color:var(--text-accent);}
-  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem;}
-  .section-title{font-size:14px;color:var(--text-secondary);margin:0;}
-  .note{font-size:12px;color:var(--text-muted);margin:0 0 8px;}
-  .legend{display:flex;gap:16px;font-size:12px;color:var(--text-secondary);margin-top:8px;}
-  .legend span{display:flex;align-items:center;gap:4px;}
-  .dot{width:10px;height:10px;border-radius:2px;}
-  .chart-wrap{position:relative;width:100%;height:360px;}
-  .top3{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
-  .top3 .item{display:flex;justify-content:space-between;font-size:13px;padding:6px 10px;background:var(--surface-1);border-radius:var(--radius);}
-  .top3 .item span:last-child{color:var(--text-secondary);}
-  .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:12px;flex-wrap:wrap;}
-  .toolbar .row{margin:0;gap:6px;}
-  .toolbar button{padding:4px 10px;font-size:12px;}
-  footer{font-size:12px;color:var(--text-muted);text-align:center;margin-top:1rem;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tripo Creative Report | July Review & August Plan</title>
+  <style>
+    :root { --bg:#090909; --panel:#111111; --line:#2c2c2c; --muted:#a6a6a6; --text:#f4f4f1; --yellow:#ffd21e; --purple:#9a75ff; --green:#59d4a2; --coral:#ff7561; --blue:#66a5ff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--text); background:var(--bg); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    button { font:inherit; }
+    .shell { max-width:1440px; margin:0 auto; padding:0 28px 72px; }
+    .topbar { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:74px; background:rgba(9,9,9,.92); backdrop-filter:blur(16px); border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:10px; font-size:18px; font-weight:800; letter-spacing:1.5px; white-space:nowrap; }
+    .brand-mark { width:22px; height:18px; background:var(--yellow); clip-path:polygon(0 0,100% 0,50% 100%); transform:rotate(180deg); }
+    nav { display:flex; overflow:auto; gap:4px; }
+    nav a { color:var(--muted); text-decoration:none; font-size:13px; padding:8px 10px; white-space:nowrap; }
+    nav a:hover { color:var(--yellow); }
+    .eyebrow { color:var(--yellow); font-size:12px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; }
+    .hero { padding:84px 0 48px; border-bottom:1px solid var(--line); display:grid; grid-template-columns:1.25fr .75fr; gap:32px; align-items:end; }
+    h1 { margin:10px 0 16px; font-size:clamp(40px,6vw,78px); line-height:1.03; letter-spacing:0; }
+    h2 { margin:0; font-size:clamp(27px,3vw,42px); line-height:1.15; letter-spacing:0; }
+    h3 { margin:0; font-size:17px; line-height:1.3; }
+    .lede { max-width:680px; color:var(--muted); font-size:17px; line-height:1.7; }
+    .hero-note { border-left:2px solid var(--purple); padding:8px 0 8px 18px; color:#d6cff9; line-height:1.6; }
+    section { padding:72px 0; border-bottom:1px solid var(--line); scroll-margin-top:74px; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:30px; }
+    .section-sub { color:var(--muted); max-width:510px; font-size:14px; line-height:1.55; }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); }
+    .metric { padding:22px; min-height:146px; border-right:1px solid var(--line); }
+    .metric:nth-child(3n) { border-right:0; }
+    .metric small { color:var(--muted); display:block; margin-bottom:15px; }
+    .metric strong { display:block; font-size:29px; letter-spacing:0; }
+    .metric span { display:block; margin-top:8px; font-size:13px; color:var(--yellow); }
+    .metric .down { color:var(--green); }
+    .overview-grid { display:grid; grid-template-columns:1.2fr .8fr; gap:32px; margin-top:36px; }
+    .comparison { border-top:1px solid var(--line); }
+    .compare-row { display:grid; grid-template-columns:122px 1fr 95px; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); }
+    .compare-name { font-size:14px; color:var(--muted); }
+    .bar-track { height:12px; background:#242424; position:relative; overflow:hidden; }
+    .bar-old, .bar-new { position:absolute; top:0; height:100%; transition:width .35s ease; }
+    .bar-old { left:0; background:#5a5a5a; }
+    .bar-new { left:0; background:var(--yellow); opacity:.88; }
+    .compare-value { text-align:right; font-variant-numeric:tabular-nums; font-size:13px; }
+    .callouts { display:grid; gap:12px; align-content:start; }
+    .callout { border-left:2px solid var(--yellow); padding:14px 0 14px 15px; color:#dedede; line-height:1.55; background:linear-gradient(90deg,rgba(255,210,30,.08),transparent); }
+    .callout strong { color:white; }
+    .test-grid { margin-top:30px; border-top:1px solid var(--line); }
+    .test-grid-head, .test-row { display:grid; grid-template-columns:76px 1.2fr 1fr 1fr; gap:14px; align-items:center; }
+    .test-grid-head { padding:13px 0 9px; color:var(--muted); font-size:12px; }
+    .test-row { padding:13px 0; border-top:1px solid var(--line); font-size:13px; }
+    .test-row strong { font-size:18px; }
+    .test-row .rate { color:var(--yellow); font-variant-numeric:tabular-nums; }
+    .test-track { height:8px; background:#242424; margin-top:6px; }
+    .test-fill { height:100%; background:var(--purple); }
+    .case-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-top:36px; }
+    .media-card { background:#151515; border:1px solid #2d2d2d; color:var(--text); padding:0; text-align:left; cursor:pointer; overflow:hidden; min-width:0; }
+    .media-card:hover, .media-card:focus-visible { border-color:var(--yellow); outline:none; }
+    .media-thumb { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; background:#242424; }
+    .case-copy { padding:13px; }
+    .case-kind { color:var(--yellow); font-size:11px; letter-spacing:.8px; text-transform:uppercase; }
+    .case-copy h3 { font-size:15px; margin:6px 0; }
+    .case-copy p { color:var(--muted); margin:0; font-size:12px; line-height:1.45; }
+    .analysis-top { display:grid; grid-template-columns:.86fr 1.14fr; gap:30px; align-items:start; }
+    .share-overview { margin:0 0 34px; }
+    .share-overview > h3 { margin-bottom:14px; }
+    .share-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .share-card { border:1px solid var(--line); padding:14px; min-width:0; }
+    .share-card h3 { font-size:14px; }
+    .share-card p { color:var(--muted); margin:5px 0 12px; font-size:11px; }
+    .share-card svg { display:block; width:100%; max-width:150px; margin:0 auto; }
+    .share-card .share-caption { color:#ddd; text-align:center; margin:7px 0 0; font-size:12px; }
+    .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+    .tab { color:#c7c7c7; padding:8px 11px; border:1px solid #333; background:transparent; cursor:pointer; font-size:13px; }
+    .tab:hover,.tab[aria-selected="true"] { color:#111; background:var(--yellow); border-color:var(--yellow); }
+    .donut-layout { display:grid; grid-template-columns:260px 1fr; gap:18px; align-items:center; }
+    .donut { width:250px; height:250px; max-width:100%; margin:auto; }
+    .legend { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 14px; }
+    .legend-item { border:0; color:#dedede; background:transparent; text-align:left; padding:3px 0; cursor:pointer; font-size:13px; display:flex; gap:8px; align-items:baseline; }
+    .legend-item:hover { color:var(--yellow); }
+    .dot { display:inline-block; width:8px; height:8px; flex:none; }
+    .legend-value { color:var(--muted); font-variant-numeric:tabular-nums; }
+    .dashboard { border-top:1px solid var(--line); padding-top:24px; }
+    .dashboard-controls { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:18px; }
+    .dashboard-controls p { color:var(--muted); margin:0; font-size:13px; }
+    .metric-toggle { display:flex; gap:5px; flex-wrap:wrap; }
+    .metric-toggle button { border:1px solid #363636; color:var(--muted); background:transparent; padding:7px 9px; cursor:pointer; font-size:12px; }
+    .metric-toggle button[aria-pressed="true"] { border-color:var(--purple); color:#fff; background:#36266b; }
+    .bar-chart { display:grid; gap:12px; }
+    .chart-row { display:grid; grid-template-columns:84px minmax(80px,1fr) 63px; align-items:center; gap:12px; }
+    .chart-label { font-size:13px; color:#dfdfdf; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .chart-track { height:24px; background:#202020; position:relative; overflow:hidden; }
+    .chart-bar { height:100%; min-width:2px; background:var(--purple); transition:width .3s ease, filter .2s ease; }
+    .chart-row:hover .chart-bar, .chart-row:focus-within .chart-bar { filter:brightness(1.45); }
+    .chart-value { font-size:13px; color:#e7e7e7; font-variant-numeric:tabular-nums; }
+    .hover-detail { min-height:43px; margin-top:19px; border-left:2px solid var(--purple); padding:10px 0 10px 12px; color:#ddd; font-size:13px; line-height:1.45; }
+    .strategy-grid { margin-top:32px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    .strategy { padding:18px; background:#111; border-top:2px solid var(--yellow); }
+    .strategy .number { color:var(--yellow); font-size:13px; font-weight:800; }
+    .strategy p { margin:10px 0 0; color:#cacaca; font-size:13px; line-height:1.6; }
+    .goal-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); }
+    .goal { padding:25px; border-right:1px solid var(--line); }
+    .goal:last-child { border-right:0; }
+    .tier { color:var(--yellow); font-size:14px; font-weight:700; }
+    .goal strong { display:block; font-size:38px; margin:12px 0 5px; color:var(--yellow); }
+    .goal-kicker { color:var(--muted); font-size:12px; letter-spacing:.4px; }
+    .goal p { color:var(--muted); font-size:13px; margin:0; line-height:1.6; }
+    .action-lanes { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); margin-top:28px; }
+    .lane { background:#111; padding:22px; min-height:190px; }
+    .lane span { color:var(--purple); font-weight:700; font-size:12px; letter-spacing:.8px; }
+    .lane h3 { margin:10px 0; }
+    .lane p { color:var(--muted); font-size:13px; line-height:1.55; margin:0; }
+    .workflow-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .workflow-panel { border:1px solid var(--line); padding:25px; background:#0f0f0f; min-width:0; }
+    .workflow-panel h3 { margin-bottom:10px; }
+    .workflow-panel > p { color:var(--muted); line-height:1.55; font-size:13px; margin:0 0 18px; }
+    .flow { display:flex; align-items:stretch; gap:0; overflow:auto; }
+    .flow-step { flex:1 0 130px; background:#181818; padding:14px; min-height:102px; font-size:13px; line-height:1.45; }
+    .flow-step b { display:block; color:var(--yellow); margin-bottom:7px; font-size:12px; }
+    .flow-arrow { color:var(--purple); display:flex; align-items:center; padding:0 8px; font-size:20px; }
+    .workflow-image { display:block; width:100%; aspect-ratio:1.72; object-fit:cover; border:1px solid #333; margin:20px 0 0; }
+    .workflow-compare { border-top:1px solid var(--line); padding-top:24px; margin-top:24px; min-width:0; }
+    .workflow-compare h3 { margin-bottom:7px; }
+    .workflow-compare > p { color:var(--muted); font-size:13px; margin:0 0 18px; }
+    .compare-cases { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .compare-pair { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
+    .compare-pair .media-card { background:#111; }
+    .deliveries { grid-column:1/-1; border-top:1px solid var(--line); padding-top:30px; }
+    .delivery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
+    .delivery { background:#111; padding:19px; }
+    .delivery b { color:var(--yellow); font-size:13px; }
+    .delivery p { margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.5; }
+    .modal { position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:22px; background:rgba(0,0,0,.83); }
+    .modal.open { display:flex; }
+    .modal-box { width:min(920px,100%); max-height:92vh; background:#111; border:1px solid #444; position:relative; padding:40px 22px 22px; }
+    .modal-close { position:absolute; right:12px; top:10px; color:#111; background:var(--yellow); border:0; width:28px; height:28px; cursor:pointer; font-size:18px; }
+    .modal-media { display:block; width:100%; max-height:74vh; object-fit:contain; background:#000; }
+    .modal-caption { color:#c9c9c9; margin:12px 0 0; font-size:14px; }
+    .source { padding-top:22px; color:#777; font-size:11px; line-height:1.5; }
+    @media (max-width:960px) { .hero,.overview-grid,.analysis-top,.workflow-grid { grid-template-columns:1fr; } .metric-grid,.strategy-grid,.action-lanes { grid-template-columns:repeat(2,1fr); } .case-grid { grid-template-columns:repeat(3,1fr); } .share-grid { grid-template-columns:repeat(3,1fr); } .goal-grid { grid-template-columns:1fr; } .goal { border-right:0; border-bottom:1px solid var(--line); } .goal:last-child { border-bottom:0; } }
+    @media (max-width:620px) { .shell { padding:0 16px 50px; } .topbar { min-height:62px; } .brand { font-size:15px; } nav { display:none; } .hero { padding:52px 0 34px; } section { padding:48px 0; } .section-head { display:block; } .section-sub { margin-top:10px; } .metric-grid,.strategy-grid,.action-lanes { grid-template-columns:1fr; } .metric { border-right:0; border-bottom:1px solid var(--line); } .metric:nth-child(3n) { border-bottom:1px solid var(--line); } .metric:last-child { border-bottom:0; } .case-grid,.share-grid { grid-template-columns:repeat(2,1fr); } .donut-layout { grid-template-columns:1fr; } .legend { grid-template-columns:1fr 1fr; } .dashboard-controls { display:block; } .metric-toggle { margin-top:12px; } .chart-row { grid-template-columns:74px minmax(60px,1fr) 56px; gap:8px; } .workflow-panel { padding:18px; } .test-grid-head, .test-row { grid-template-columns:50px 1fr 1fr 1fr; gap:8px; } .test-row strong { font-size:16px; } .compare-cases { grid-template-columns:1fr; } }
+  </style>
 </head>
 <body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span>TRIPO</div>
+      <nav aria-label="报告章节"><a href="#overview">总览</a><a href="#audience">T1 受众</a><a href="#august">8月计划</a><a href="#workflow">AI Workflow</a></nav>
+    </header>
 
-<h1>海外广告素材标签占比与投放效果看板</h1>
-<p class="subtitle">Tripo 自投素材 · 5 个标签维度：行业 / 卖点 / 内容 / 模式 / 风格</p>
+    <div class="hero">
+      <div><div class="eyebrow">Creative intelligence report / July 2026</div><h1>7月复盘<br>8月计划</h1><p class="lede">从投放数据、优质素材、细分受众到 AI Workflow，把增长团队的下一步重点压缩为一张可探索的作战地图。</p></div>
+      <div class="hero-note">7月投放从“量”转向“质”：二剪视频 CTR 环比提升 <b>109%</b>，订阅 CPA 下降 <b>23%</b>。8月将围绕本地化、强 Hook、专业人群和自动化生产扩量。</div>
+    </div>
 
-<div class="row" id="tabs"></div>
+    <section id="overview">
+      <div class="section-head"><div><div class="eyebrow">01 / July overview</div><h2>7月素材数据总览：核心指标对比</h2></div><p class="section-sub">7月初归因异常影响 CPC 与 CPM；修复后，放量带来 CTR 回落。核心问题在于拉新吸引力，而非付费转化能力。</p></div>
+      <div class="metric-grid" aria-label="7月核心投放指标">
+        <div class="metric"><small>花费（USD）</small><strong>$1.02M</strong><span>较6月 +21.23%</span></div>
+        <div class="metric"><small>整体 CTR</small><strong>1.28%</strong><span class="down">较6月 -27.84%</span></div>
+        <div class="metric"><small>注册数</small><strong>91,523</strong><span>较6月 +17.56%</span></div>
+        <div class="metric"><small>订阅数</small><strong>12,022</strong><span>较6月 +15.07%</span></div>
+        <div class="metric"><small>订阅 CPA</small><strong>$84.55</strong><span>较6月 +5.36%</span></div>
+        <div class="metric"><small>ROI</small><strong>23.36%</strong><span class="down">较6月 -24.34%</span></div>
+      </div>
+      <div class="overview-grid">
+        <div><h3>6月 vs 7月</h3><div id="overview-bars" class="comparison" aria-label="核心指标对比图"></div></div>
+        <div class="callouts"><div class="callout"><strong>二剪是增长杠杆。</strong> 5条新爆款中有3条为二剪视频；CTR +109%，订阅增长 +47.1%。</div><div class="callout"><strong>测试效率有优势。</strong> In-house 素材通过率与爆款率领先，T2/T3 通过率达 32%–46%，但测试总量只有 208 条。</div><div class="callout"><strong>欧洲需要内容再验证。</strong> DE/FR/GB 占约20%预算，ROI仅 0.04–0.07；先以本地化内容寻找低成本切口。</div></div>
+      </div>
+      <div class="test-grid" aria-label="T1、T2、T3测新素材通过率和爆款率">
+        <div class="test-grid-head"><span>Tier</span><span>素材总数</span><span>通过率</span><span>爆款率</span></div>
+        <div class="test-row"><b>T1</b><strong>165</strong><div><span class="rate">13%</span><div class="test-track"><div class="test-fill" style="width:28%"></div></div></div><div><span class="rate">3.0%</span><div class="test-track"><div class="test-fill" style="width:60%;background:var(--coral)"></div></div></div></div>
+        <div class="test-row"><b>T2</b><strong>24</strong><div><span class="rate">46%</span><div class="test-track"><div class="test-fill" style="width:100%"></div></div></div><div><span class="rate">—</span><div class="test-track"><div class="test-fill" style="width:0%;background:var(--coral)"></div></div></div></div>
+        <div class="test-row"><b>T3</b><strong>19</strong><div><span class="rate">32%</span><div class="test-track"><div class="test-fill" style="width:70%"></div></div></div><div><span class="rate">—</span><div class="test-track"><div class="test-fill" style="width:0%;background:var(--coral)"></div></div></div></div>
+      </div>
+      <div class="case-grid" aria-label="爆款与优质素材案例">
+        <button class="media-card" data-type="video" data-src="assets/videos/video-08-creatives-7-8-web-2dto3d-ai-kr-0707-lqq-b813ccf9.mp4" data-caption="家居装饰 + 3D打印，面向日韩的达人二剪素材，测新爆款 9+6 次订阅。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-08-creatives-7-8-web-2dto3d-ai-kr-0707-lqq-b813ccf9.mp4"></video><div class="case-copy"><span class="case-kind">二剪爆款</span><h3>家居 × 3D打印</h3><p>日韩本地化 + 达人内容</p></div></button>
+        <button class="media-card" data-type="image" data-src="assets/images/image-23-creatives-7-8-web-en-0109-wjh-hzt-202605-638c0eb9.png" data-caption="AI图片爆款，33+25 次订阅：按国家手动调整 prompt，并以当地3D文化主体作为参考。"><img class="media-thumb" src="assets/images/image-23-creatives-7-8-web-en-0109-wjh-hzt-202605-638c0eb9.png" alt="AI 家居场景素材"><div class="case-copy"><span class="case-kind">AI 图片</span><h3>本地文化 Prompt</h3><p>33+25 次订阅</p></div></button>
+        <button class="media-card" data-type="image" data-src="assets/images/image-22-creatives-7-8-web-3d-en-0407-jl-1-hzt-20-a5872f79.png" data-caption="AI图片爆款：3D打印人物三连图，针对美国市场的 Mecha 硬表面机甲方向参考。"><img class="media-thumb" src="assets/images/image-22-creatives-7-8-web-3d-en-0407-jl-1-hzt-20-a5872f79.png" alt="AI 3D打印人物素材"><div class="case-copy"><span class="case-kind">AI 图片</span><h3>Mecha 3D打印</h3><p>美国本地化参考</p></div></button>
+        <button class="media-card" data-type="image" data-src="assets/images/image-21-creatives-7-8-web-2dto3d-en-0609-x1-54db713c.jpg" data-caption="8K贴图功能素材：以专业细节和产品 UI 强化产品认知，T2+T3 共 732 次、T1 59 次订阅。"><img class="media-thumb" src="assets/images/image-21-creatives-7-8-web-2dto3d-en-0609-x1-54db713c.jpg" alt="8K 贴图功能素材"><div class="case-copy"><span class="case-kind">跑量爆款</span><h3>8K 贴图细节</h3><p>T2+T3 732 次订阅</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-10-creatives-7-8-web-2dto3d-3d-q-en-0701-ti-2bacbffd.mp4" data-caption="AI生成3D打印效果提升：用实拍落地场景承接专业用户需求，跑量爆款 54 次订阅。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-10-creatives-7-8-web-2dto3d-3d-q-en-0701-ti-2bacbffd.mp4"></video><div class="case-copy"><span class="case-kind">跑量爆款</span><h3>3D打印实拍</h3><p>54 次订阅</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-14-creatives-7-8-web-2dto3d-arvr-ar-en-0616-b61164b2.mp4" data-caption="爆款公式：分屏形式 + AR游戏 UI + 跑量骷髅模型，T1 52次、T2 57次订阅。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-14-creatives-7-8-web-2dto3d-arvr-ar-en-0616-b61164b2.mp4"></video><div class="case-copy"><span class="case-kind">爆款公式</span><h3>AR UI + 分屏</h3><p>T1 52 / T2 57</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-06-creatives-7-8-web-2dto3d-3d-jp-0706-zmh-afa61e1d.mp4" data-caption="日韩测新爆款：婚纱花瓶过程演示，家居与3D打印场景结合。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-06-creatives-7-8-web-2dto3d-3d-jp-0706-zmh-afa61e1d.mp4"></video><div class="case-copy"><span class="case-kind">二剪爆款</span><h3>婚纱花瓶</h3><p>日本本地化过程演示</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-13-creatives-7-8-web-2dto3d-en-0706-tim-91efea20.mp4" data-caption="电商方向测新爆款：鞋子商品模型展示，5次订阅。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-13-creatives-7-8-web-2dto3d-en-0706-tim-91efea20.mp4"></video><div class="case-copy"><span class="case-kind">测新爆款</span><h3>鞋子模型</h3><p>电商产品模型</p></div></button>
+        <button class="media-card" data-type="image" data-src="assets/images/image-20-creatives-7-8-image-67ffdc6a.png" data-caption="Low Poly场景化视觉：模仿 Minecraft 视觉效果，弥补 Smart Mesh 场景素材短板，92次订阅。"><img class="media-thumb" src="assets/images/image-20-creatives-7-8-image-67ffdc6a.png" alt="Low Poly场景化视觉素材"><div class="case-copy"><span class="case-kind">跑量爆款</span><h3>Low Poly 场景</h3><p>92 次订阅</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-04-creatives-7-8-web-2dto3d-3d-ai-en-0629-t-32907160.mp4" data-caption="热点结合：世界杯内容与 DIY 3D 打印手办场景结合，60次订阅。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-04-creatives-7-8-web-2dto3d-3d-ai-en-0629-t-32907160.mp4"></video><div class="case-copy"><span class="case-kind">热点结合</span><h3>足球小将</h3><p>60 次订阅</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-05-creatives-7-8-web-2dto3d-3d-ai-jp-0710-l-4a4152d3.mp4" data-caption="日本本地化跑量：本地流行内容 × 3D打印，39+28次订阅案例之一。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-05-creatives-7-8-web-2dto3d-3d-ai-jp-0710-l-4a4152d3.mp4"></video><div class="case-copy"><span class="case-kind">本地化</span><h3>日本独角仙</h3><p>日本本地跑量</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-15-creatives-7-8-web-2dto3d-ai-jp-0702-lqq-3e15ee24.mp4" data-caption="日本本地化跑量：禅意家居风格与本地3D打印/家居方向结合。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-15-creatives-7-8-web-2dto3d-ai-jp-0702-lqq-3e15ee24.mp4"></video><div class="case-copy"><span class="case-kind">本地化</span><h3>禅意家居</h3><p>日本风格结合</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-03-creatives-7-8-web-2dto3d-3d-fr-0708-zmh-3b98fec2.mp4" data-caption="专业性提质：Team版实验周期与外包成本痛点，艺术灯具雕塑过程演示。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-03-creatives-7-8-web-2dto3d-3d-fr-0708-zmh-3b98fec2.mp4"></video><div class="case-copy"><span class="case-kind">专业提质</span><h3>艺术灯具雕塑</h3><p>FR 过程演示</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-11-creatives-7-8-web-2dto3d-3d-en-0710-tim-85102abe.mp4" data-caption="专业性提质：持续挖掘 Team 版用户痛点，拆件、批量、3D打印结合实拍。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-11-creatives-7-8-web-2dto3d-3d-en-0710-tim-85102abe.mp4"></video><div class="case-copy"><span class="case-kind">专业提质</span><h3>拆件 × 批量</h3><p>Team 用户痛点</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-09-creatives-7-8-web-2dto3d-low-poly-en-072-b77f91a7.mp4" data-caption="专业性提质：团队游戏开发痛点 + 传送门视觉，结合 Low Poly、资产管理和生成速度。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-09-creatives-7-8-web-2dto3d-low-poly-en-072-b77f91a7.mp4"></video><div class="case-copy"><span class="case-kind">专业提质</span><h3>游戏开发传送门</h3><p>Team 版痛点</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-07-creatives-7-8-web-2dto3d-txtto3d-ip-4-5--93da7a76.mp4" data-caption="专业性提质：手动修模、打光、渲染，在 DCC 平台进行高质量展示。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-07-creatives-7-8-web-2dto3d-txtto3d-ip-4-5--93da7a76.mp4"></video><div class="case-copy"><span class="case-kind">专业提质</span><h3>直升机滑雪车</h3><p>DCC 高质量展示</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-18-creatives-7-8-web-en-0729-tim-c7f3816e.mp4" data-caption="专业性提质：飞龙贴图对比，突出专业痛点与拉踩对比。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-18-creatives-7-8-web-en-0729-tim-c7f3816e.mp4"></video><div class="case-copy"><span class="case-kind">专业提质</span><h3>飞龙贴图对比</h3><p>对比型 Hook</p></div></button>
+        <button class="media-card" data-type="video" data-src="assets/videos/video-12-creatives-7-8-web-2dto3d-a-en-0629-tim-b22b25cb.mp4" data-caption="专业性提质：哥特游戏场景与拓扑细节展示，强化科幻风格和对比 Hook。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-12-creatives-7-8-web-2dto3d-a-en-0629-tim-b22b25cb.mp4"></video><div class="case-copy"><span class="case-kind">专业提质</span><h3>哥特游戏场景</h3><p>科幻 + 对比</p></div></button>
+      </div>
+    </section>
 
-<div class="card">
-  <div class="toolbar">
-    <p class="section-title">标签占比结构：7月新测达标 vs 历史累计</p>
-    <div class="row" id="modeToggle"></div>
-  </div>
-  <p class="note" id="modeNote"></p>
-  <div class="chart-wrap"><canvas id="compChart" role="img" aria-label="占比对比条形图"></canvas></div>
-  <div class="legend" id="compLegend"></div>
-</div>
+    <section id="audience">
+      <div class="section-head"><div><div class="eyebrow">02 / Audience matrix</div><h2>7月 T1 素材细分受众分析</h2></div><p class="section-sub">107 条 T1 通过+爆款素材（CPA ≤160、订阅 ≥5、花费约 $500+）。在图中悬停或点选标签可查看各维度的构成与表现。</p></div>
+      <div class="share-overview"><h3>107 条跑量素材的 5 个标签维度占比</h3><div id="share-grid" class="share-grid" aria-label="T1通过加爆款跑量素材五维标签占比"></div></div>
+      <div class="analysis-top">
+        <div><div class="tabs" id="share-tabs" role="tablist" aria-label="标签维度"></div><div class="donut-layout"><svg id="donut" class="donut" viewBox="0 0 250 250" role="img" aria-label="素材标签占比分布"></svg><div id="legend" class="legend" aria-label="标签占比图例"></div></div></div>
+        <div class="dashboard"><div class="dashboard-controls"><div><h3 id="dashboard-title">行业人群表现</h3><p id="dashboard-desc">T1所有素材：按标签查看订阅量、CTR、通过率与爆款率。</p></div><div class="metric-toggle" id="metric-toggle"></div></div><div id="bar-chart" class="bar-chart" aria-label="标签表现条形图"></div><div id="hover-detail" class="hover-detail">悬停在图例或条形图上查看标签数据。</div></div>
+      </div>
+      <div class="strategy-grid"><article class="strategy"><span class="number">01 / Hook</span><h3>先抓点击，再给结果</h3><p>从“高质量展示”切至“痛点 + 拉踩对比”；首帧采用线框 → 白模 → 渲染的过程，提升点击动机。</p></article><article class="strategy"><span class="number">02 / 风格</span><h3>科幻 + 卡通扩到 50%+</h3><p>科幻 CTR 1.36%、CPA 168.7、爆款率 4.8%；卡通 CTR 1.61%，是 CTR 1.5% 的主力组合。</p></article><article class="strategy"><span class="number">03 / 人群</span><h3>3D打印 + 游戏扩量</h3><p>3D打印 CTR 1.36%、通过率 13.2%；游戏 CTR 1.11%、爆款率 3.6%，三项关键指标均衡。</p></article><article class="strategy"><span class="number">04 / 卖点</span><h3>精度 + 2Dto3D 继续主打</h3><p>生成精度通过率 15.5%、爆款率 3.5%；2Dto3D 订阅量 1,263、通过率 12.1%。</p></article></div>
+    </section>
 
-<div class="card">
-  <div class="toolbar">
-    <p class="section-title" id="perfTitle"></p>
-    <div class="row" id="perfToggle"></div>
-  </div>
-  <p class="note" id="perfNote"></p>
-  <div class="chart-wrap"><canvas id="perfChart" role="img" aria-label="效果气泡图"></canvas></div>
-  <div class="top3" id="perfTop"></div>
-</div>
+    <section id="august">
+      <div class="section-head"><div><div class="eyebrow">03 / August plan</div><h2>8月目标拆解 & 下一步计划</h2></div><p class="section-sub">以素材通过率和 CTR 作为 T1 的主驱动，同时为欧洲市场验证 1–2 个潜力受众或内容方向。</p></div>
+      <div class="goal-grid"><article class="goal"><span class="tier">T1</span><strong>$190</strong><span class="goal-kicker">目标 CAC · 测新 150 条</span><p>通过率 16%；6 个爆款（4%）；CTR 提升至 1.5%</p></article><article class="goal"><span class="tier">T2</span><strong>$79</strong><span class="goal-kicker">目标 CAC · 测新 40 条</span><p>BR 目标 CAC $35；通过率 40%；1 个爆款</p></article><article class="goal"><span class="tier">T3</span><strong>$20</strong><span class="goal-kicker">目标 CAC · 测新 40 条</span><p>通过率 25%；1 个爆款</p></article></div>
+      <div class="action-lanes"><article class="lane"><span>LOCALIZE</span><h3>国家拆分责任</h3><p>成立本地化素材小组；为受限的达人二剪补足原创图片、视频、文案与卖点本地化。</p></article><article class="lane"><span>CREATE</span><h3>内容短板补齐</h3><p>游戏+影视行业增加复古模型，扩大奇幻风格测试；用热点与本地流行元素创造新题材。</p></article><article class="lane"><span>OPTIMIZE</span><h3>强 Hook 试验</h3><p>围绕线框、白模、拉踩对比、专业痛点迭代首帧，优先冲击 In-house T1 CTR 1.2%–1.5%。</p></article><article class="lane"><span>EXPLORE</span><h3>欧洲新方向</h3><p>DE / FR / GB 用更多内容类型与受众组合测试，找到可复制的低成本获客方向。</p></article></div>
+    </section>
 
-<footer>数据来源：7月测新达标 + 历史&amp;新素材统计 · 由 Claude 生成</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
-<script>
-// perf row: [name, cpa, ctrPct, subs(null=missing), passRatePct, viralRatePct, count]
-const DATA = {
-  "行业": {
-    newTotal:17, histTotal:125,
-    comp: [["3D打印",6,25],["家居",3,19],["电商",2,5],["游戏",2,18],["其他",2,47],["影视",1,5],["工业",1,2],["ARVR",0,4]],
-    perf: [
-      ["其他",175.2,0.66,1788,10.9,2.1,430],["家居",182.3,0.83,912,13.5,1.4,141],
-      ["3D打印",187.8,1.36,709,13.2,2.6,189],["游戏",194.0,1.11,635,10.2,3.6,167],
-      ["ARVR",192.7,0.50,236,6.7,0,60],["电商",214.1,0.76,222,7.5,0,67],
-      ["工业",222.5,0.68,153,8.7,4.3,23],["影视",212.6,0.83,116,10.2,0,49]
-    ]
-  },
-  "卖点": {
-    newTotal:17, histTotal:146,
-    comp: [["2Dto3D",7,40],["Txtto3D",3,8],["贴图",2,32],["生成精度",1,35],["SmartMesh",1,6],["批量",1,4],["生成速度",1,4],["绑骨",1,1],["拆件",0,7],["多视角",0,5],["综合",0,4],["工作流",0,0]],
-    perf: [
-      ["电商",128.3,0.49,104,22.2,0,9],["生成精度",173.3,0.68,996,15.5,3.5,226],
-      ["3D打印",187.8,1.36,709,13.2,2.6,189],["拆件",147.6,0.69,206,13.2,1.9,53],
-      ["贴图",186.3,0.65,1175,12.6,2.0,253],["2Dto3D",196.0,1.06,1263,12.1,2.4,330],
-      ["Txtto3D",174.4,0.95,262,12.1,1.5,66],["生成速度",209.7,0.80,175,11.1,8.3,36],
-      ["游戏场景",219.5,1.03,null,10.1,3.4,89],["绑骨",149.3,0.97,141,3.2,0,31],
-      ["工作流",246.2,0.50,226,0,0,54],["资产管理",null,0.47,0,0,0,4]
-    ]
-  },
-  "内容": {
-    newTotal:15, histTotal:123,
-    comp: [["装饰",4,7],["人物",4,36],["家居",3,19],["怪兽",1,10],["动物",1,5],["产品",1,4],["工业",1,2],["道具",0,17],["建筑",0,12],["风景",0,6],["机甲",0,3],["综合",0,2]],
-    perf: [
-      ["建筑",178.1,0.72,370,17.6,5.9,68],["装饰",216.5,1.58,195,16.7,0,42],
-      ["家居",182.3,0.83,912,13.5,1.4,141],["人物",157.4,0.97,882,11.9,3.3,303],
-      ["动物",207.3,0.71,104,11.1,0,45],["综合",252.3,0.66,109,11.1,0,18],
-      ["饮食",196.6,0.89,45,10.5,0,19],["风景",227.1,0.60,224,10.2,0,59],
-      ["道具",188.3,0.67,972,9.8,1.7,174],["怪兽",185.6,1.04,558,9.0,1.8,111],
-      ["工业",222.5,0.68,153,8.7,4.3,23],["机甲",175.3,1.12,131,6.7,4.4,45],
-      ["产品",216.3,0.76,126,6.2,0,65],["交通",197.3,0.65,156,4.3,4.3,46]
-    ]
-  },
-  "模式": {
-    newTotal:23, histTotal:158,
-    comp: [["渲染",14,100],["白模",7,50],["线框",2,6],["法线",0,2]],
-    perf: [
-      ["渲染",187.2,0.86,3805,11.3,2.3,887],["白模",195.4,0.90,2075,10.5,2.5,475],
-      ["法线",225.0,0.70,86,9.1,4.5,22],["线框",191.5,1.26,337,7.5,2.5,80]
-    ]
-  },
-  "风格": {
-    newTotal:5, histTotal:51,
-    comp: [["现实",2,15],["卡通",2,10],["复古",1,18],["科幻",0,8]],
-    perf: [
-      ["现实",193.6,0.60,307,14.8,1.6,61],["卡通",213.8,1.61,117,11.6,4.7,43],
-      ["科幻",168.7,1.36,163,9.5,4.8,42],["复古",216.5,0.85,159,8.7,2.2,46],
-      ["奇幻",null,0.81,0,0,0,9]
-    ]
-  }
-};
-
-const dims = Object.keys(DATA);
-let mode = 'pct';
-let perfView = 'down';
-const tabsEl = document.getElementById('tabs');
-dims.forEach((d,i)=>{
-  const b = document.createElement('button');
-  b.textContent = d;
-  b.dataset.dim = d;
-  if (i===0) b.classList.add('active');
-  b.onclick = () => switchDim(d);
-  tabsEl.appendChild(b);
-});
-
-function mkToggle(container, options, getVal, setVal, onChange){
-  options.forEach(([val,label])=>{
-    const b = document.createElement('button');
-    b.textContent = label;
-    b.dataset.val = val;
-    if (val===getVal()) b.classList.add('active');
-    b.onclick = () => { setVal(val); onChange(); refreshToggle(container, getVal); };
-    container.appendChild(b);
-  });
-}
-function refreshToggle(container, getVal){
-  Array.from(container.children).forEach(b=>{
-    b.classList.toggle('active', b.dataset.val === getVal());
-  });
-}
-
-const modeToggleEl = document.getElementById('modeToggle');
-mkToggle(modeToggleEl, [['pct','占比%'],['count','条数']], ()=>mode, (v)=>mode=v, ()=>renderComp(currentDim));
-
-const perfToggleEl = document.getElementById('perfToggle');
-mkToggle(perfToggleEl, [['up','上游 CTR→通过率'],['down','下游 CPA→爆款率']], ()=>perfView, (v)=>perfView=v, ()=>renderPerf(currentDim));
-
-let compChart, perfChart, currentDim;
-const COLOR_NEW = '#eb6834';
-const COLOR_HIST = '#898781';
-const COLOR_BUBBLE = 'rgba(42,120,214,0.55)';
-const COLOR_BUBBLE_BORDER = '#2a78d6';
-const COLOR_BUBBLE2 = 'rgba(29,158,117,0.55)';
-const COLOR_BUBBLE2_BORDER = '#0f6e56';
-
-function renderComp(dim) {
-  currentDim = dim;
-  const d = DATA[dim];
-  const rows = d.comp.map(r=>{
-    const pctNew = r[1]/d.newTotal*100;
-    const pctHist = r[2]/d.histTotal*100;
-    return { name:r[0], countNew:r[1], countHist:r[2], pctNew, pctHist };
-  }).sort((a,b)=> mode==='pct' ? b.pctNew-a.pctNew : b.countHist-a.countHist);
-
-  const labels = rows.map(r=>r.name);
-  const newVals = rows.map(r=> mode==='pct' ? +r.pctNew.toFixed(1) : r.countNew);
-  const histVals = rows.map(r=> mode==='pct' ? +r.pctHist.toFixed(1) : r.countHist);
-
-  document.getElementById('modeNote').textContent = mode==='pct'
-    ? '占比分别在"7月新测(n='+d.newTotal+')"与"历史(n='+d.histTotal+')"各自总量内计算，两期基数不同，条形长短代表标签在各自周期内的集中度，不代表绝对条数多少。'
-    : '此视图展示原始条数，历史累计基数更大，条形自然更长，用于核对占比视图背后的真实样本量。';
-
-  const ctx = document.getElementById('compChart');
-  if (compChart) compChart.destroy();
-  compChart = new Chart(ctx, {
-    type: 'bar',
-    data: { labels, datasets: [
-      { label: '7月新测', data: newVals, backgroundColor: COLOR_NEW, borderRadius: 4, barThickness: 12,
-        meta: rows.map(r=>({count:r.countNew, pct:r.pctNew})) },
-      { label: '历史累计', data: histVals, backgroundColor: COLOR_HIST, borderRadius: 4, barThickness: 12,
-        meta: rows.map(r=>({count:r.countHist, pct:r.pctHist})) }
-    ]},
-    options: {
-      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-      layout: { padding: { right: 60 } },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: (c)=>{
-          const m = c.dataset.meta[c.dataIndex];
-          return c.dataset.label+'：'+m.count+'条，占比'+m.pct.toFixed(1)+'%';
-        }}},
-        datalabels: {
-          anchor: 'end', align: 'right', color: '#52514e', font:{size:11},
-          formatter: (val, ctx) => {
-            const m = ctx.dataset.meta[ctx.dataIndex];
-            return mode==='pct' ? (m.count+'条 '+m.pct.toFixed(1)+'%') : (m.pct.toFixed(1)+'%');
-          }
-        }
-      },
-      scales: {
-        x: { title:{display:true,text: mode==='pct' ? '占比 %' : '条数'}, grid:{color:'#e1e0d9'}, ticks:{color:'#898781'} },
-        y: { grid:{display:false}, ticks:{color:'#52514e',font:{size:12}} }
-      }
-    },
-    plugins: [ChartDataLabels]
-  });
-  document.getElementById('compLegend').innerHTML =
-    '<span><span class="dot" style="background:'+COLOR_NEW+'"></span>7月新测</span>'+
-    '<span><span class="dot" style="background:'+COLOR_HIST+'"></span>历史累计</span>';
-}
-
-function renderPerf(dim) {
-  const all = DATA[dim].perf;
-  document.getElementById('perfTitle').textContent = perfView==='down'
-    ? '下游：CPA 均值 x 爆款率，气泡大小 = 投放条数'
-    : '上游：CTR 均值 x 通过率(达标率)，气泡大小 = 投放条数';
-  document.getElementById('perfNote').textContent = perfView==='down'
-    ? '花钱效率视角：左上角（CPA低、爆款率高）是值得加投的标签；订阅数、通过率见气泡悬浮提示。'
-    : '素材吸引力视角：右上角（CTR高、通过率高）是最容易过测试关的方向；订阅数见气泡悬浮提示。';
-
-  const rows = perfView==='down' ? all.filter(r=>r[1]!==null) : all;
-  const counts = rows.map(r=>r[6]);
-  const maxC = Math.max(...counts), minC = Math.min(...counts);
-  const scaleR = (c) => 6 + (Math.sqrt(c)-Math.sqrt(minC))/(Math.sqrt(maxC)-Math.sqrt(minC)||1) * 22;
-
-  const points = rows.map(r=>{
-    const [name,cpa,ctr,subs,passRate,viralRate,count] = r;
-    return {
-      x: perfView==='down' ? cpa : ctr,
-      y: perfView==='down' ? viralRate : passRate,
-      r: scaleR(count), label:name, cpa, ctr, subs, passRate, viralRate, count
+    <section id="workflow">
+      <div class="section-head"><div><div class="eyebrow">04 / AI workflow</div><h2>AI Workflow 基建</h2></div><p class="section-sub">7月已经形成素材分析、数字人视频和视频翻译三项能力；8月将接入素材中台，实现规模化调用与审核。</p></div>
+      <div class="workflow-grid">
+        <article class="workflow-panel"><h3>数字人视频模板 workflow</h3><p>Magnific 工作流串联 ElevenLabs、Nanobanana Pro、GPT、Veed 与 Kling，快速形成多角色、多文案、多语言的视频版本。</p><div class="flow"><div class="flow-step"><b>01</b>选择数字人形象<br>按男女拆分</div><div class="flow-arrow">→</div><div class="flow-step"><b>02</b>批量生成不同方向文案与 VO</div><div class="flow-arrow">→</div><div class="flow-step"><b>03</b>角色、口播与视频批量匹配</div></div><img class="workflow-image" src="assets/images/image-19-creatives-7-8-image-1-f170aa6c.png" alt="Magnific 数字人 workflow 示意"></article>
+        <article class="workflow-panel"><h3>VOZO 视频一键翻译</h3><p>上传原视频后生成多语言口播字幕、VO音频与口型同步，当前聚焦字幕动效跟随、口型同步与字幕位置动态适配。</p><div class="flow"><div class="flow-step"><b>INPUT</b>原视频</div><div class="flow-arrow">→</div><div class="flow-step"><b>LOCALIZE</b>字幕 + VO + 口型</div><div class="flow-arrow">→</div><div class="flow-step"><b>REVIEW</b>人工校对与输出</div></div><div class="workflow-compare"><h3>翻译对比案例</h3><p>两组原始视频与翻译后版本均可预览；关闭预览时会立即停止视频与音频。</p><div class="compare-cases"><div class="compare-pair"><button class="media-card" data-type="video" data-src="assets/videos/video-16-creatives-7-8-web-3d-asmr-en-0410-wjh-2eccbe8d.mp4" data-caption="VOZO 翻译对比 01 · BEFORE：英文原始视频。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-16-creatives-7-8-web-3d-asmr-en-0410-wjh-2eccbe8d.mp4"></video><div class="case-copy"><span class="case-kind">Before</span><h3>EN 原始视频</h3></div></button><button class="media-card" data-type="video" data-src="assets/videos/video-17-creatives-7-8-web-3d-asmr-es-0410-wjh-f0b900c9.mp4" data-caption="VOZO 翻译对比 01 · AFTER：西班牙语翻译版。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-17-creatives-7-8-web-3d-asmr-es-0410-wjh-f0b900c9.mp4"></video><div class="case-copy"><span class="case-kind">After</span><h3>ES 翻译版</h3></div></button></div><div class="compare-pair"><button class="media-card" data-type="video" data-src="assets/videos/video-02-creatives-7-8-web-2dto3d-3d-en-0517-tim-ea9726fe.mp4" data-caption="VOZO 翻译对比 02 · BEFORE：英文原始视频。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-02-creatives-7-8-web-2dto3d-3d-en-0517-tim-ea9726fe.mp4"></video><div class="case-copy"><span class="case-kind">Before</span><h3>EN 原始视频</h3></div></button><button class="media-card" data-type="video" data-src="assets/videos/video-01-creatives-7-8-chinese-web-2dto3d-3d-en-0-bd1d8d12.mp4" data-caption="VOZO 翻译对比 02 · AFTER：中文翻译版。"><video muted preload="metadata" class="media-thumb"><source src="assets/videos/video-01-creatives-7-8-chinese-web-2dto3d-3d-en-0-bd1d8d12.mp4"></video><div class="case-copy"><span class="case-kind">After</span><h3>中文翻译版</h3></div></button></div></div></div></article>
+        <div class="deliveries"><h3>8月基建交付清单</h3><div class="delivery-grid"><div class="delivery"><b>素材分析 Skills V1.5</b><p>加入模型内容分类 × 风格交叉维度，结合付费率优化 CPA 分析与图表呈现。</p></div><div class="delivery"><b>数字人 Workflow 接入 VAST</b><p>连接 ElevenLabs / Seed audio 1.0 / Kling API，接入可复用的数字人模板。</p></div><div class="delivery"><b>VOZO API 批处理</b><p>自动化多语言视频翻译任务，逐步处理字幕与口型同步质量问题。</p></div><div class="delivery"><b>VAST AI 素材打标上线</b><p>为素材中台提供可检索的结构化标签基础。</p></div><div class="delivery"><b>品牌 & 增长 Wiki Agent</b><p>支持 AI 批量审核基础图片素材，沉淀增长知识。</p></div><div class="delivery"><b>投放文案库 Agent</b><p>GG Search 关键词与素材自动匹配文案，缩短投放文案生产链路。</p></div></div></div>
+      </div>
+      <p class="source">数据来源：PDF 原版《Creatives 7月素材复盘&8月计划》；正文、图表及素材链接以 Cloud Doc Convertor Markdown 导出版本为准。</p>
+    </section>
+  </main>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="素材预览"><div class="modal-box"><button class="modal-close" id="modal-close" aria-label="关闭预览">×</button><div id="modal-content"></div><p id="modal-caption" class="modal-caption"></p></div></div>
+  <script>
+    const overview=[
+      {name:'花费 (USD)',old:838444.21,new:1016483.25,format:v=>'$'+(v/1000000).toFixed(2)+'M',delta:'+21.23%'},
+      {name:'CTR',old:1.77,new:1.28,format:v=>v.toFixed(2)+'%',delta:'-27.84%'},
+      {name:'注册数',old:77849,new:91523,format:v=>v.toLocaleString(),delta:'+17.56%'},
+      {name:'订阅数',old:10448,new:12022,format:v=>v.toLocaleString(),delta:'+15.07%'},
+      {name:'订阅 CPA',old:80.25,new:84.55,format:v=>'$'+v.toFixed(2),delta:'+5.36%'},
+      {name:'ROI',old:30.87,new:23.36,format:v=>v.toFixed(2)+'%',delta:'-24.34%'}
+    ];
+    const shares={
+      industry:{name:'行业人群',note:'T1 通过+爆款跑量素材标签构成，共125个标签。',items:[['其他',47],['3D打印',25],['家居',19],['游戏',18],['电商',5],['影视',5],['ARVR',4],['工业',2]],performance:{'3D打印':{subs:709,ctr:1.36,pass:13.2,hit:2.6},'游戏':{subs:635,ctr:1.11,pass:10.2,hit:3.6},'家居':{subs:912,ctr:.83,pass:13.5,hit:1.4},'影视':{subs:116,ctr:.83,pass:10.2,hit:0},'电商':{subs:222,ctr:.76,pass:7.5,hit:0},'工业':{subs:153,ctr:.68,pass:8.7,hit:4.3},'其他':{subs:1788,ctr:.66,pass:10.9,hit:2.1},'ARVR':{subs:236,ctr:.50,pass:6.7,hit:0}}},
+      style:{name:'风格（游戏+影视）',note:'T1 通过+爆款跑量素材标签构成，共51个标签。',items:[['复古',18],['现实',15],['卡通',10],['科幻',8]],performance:{'卡通':{subs:117,ctr:1.61,pass:11.6,hit:4.7},'科幻':{subs:163,ctr:1.36,pass:9.5,hit:4.8},'复古':{subs:159,ctr:.85,pass:8.7,hit:2.2},'现实':{subs:307,ctr:.60,pass:14.8,hit:1.6},'奇幻':{subs:0,ctr:.81,pass:0,hit:0}}},
+      product:{name:'产品卖点',note:'T1 通过+爆款跑量素材标签构成，共146个标签。',items:[['2Dto3D',40],['生成精度',35],['贴图',32],['Txtto3D',8],['拆件',7],['SmartMesh',6],['多视角',5],['生成速度',4],['批量',4],['综合',4],['绑骨',1]],performance:{'3D打印':{subs:709,ctr:1.36,pass:13.2,hit:2.6},'2Dto3D':{subs:1263,ctr:1.06,pass:12.1,hit:2.4},'游戏场景':{subs:0,ctr:1.03,pass:10.1,hit:3.4},'绑骨':{subs:141,ctr:.97,pass:3.2,hit:0},'Txtto3D':{subs:262,ctr:.95,pass:12.1,hit:1.5},'生成速度':{subs:175,ctr:.80,pass:11.1,hit:8.3},'拆件':{subs:206,ctr:.69,pass:13.2,hit:1.9},'生成精度':{subs:996,ctr:.68,pass:15.5,hit:3.5},'贴图':{subs:1175,ctr:.65,pass:12.6,hit:2.0},'工作流':{subs:226,ctr:.50,pass:0,hit:0},'电商':{subs:104,ctr:.49,pass:22.2,hit:0},'资产管理':{subs:0,ctr:.47,pass:0,hit:0}}},
+      model:{name:'模型内容分类',note:'T1 通过+爆款跑量素材标签构成，共123个标签。',items:[['人物',36],['家居',19],['道具',17],['建筑',12],['怪兽',10],['装饰',7],['风景',6],['动物',5],['产品',4],['机甲',3],['工业',2],['综合',2]]},
+      display:{name:'显示模式',note:'T1 通过+爆款跑量素材标签构成，共158个标签。',items:[['渲染',100],['白模',50],['线框',6],['法线',2]]}
     };
-  });
-
-  const ctx = document.getElementById('perfChart');
-  if (perfChart) perfChart.destroy();
-  const color = perfView==='down' ? COLOR_BUBBLE : COLOR_BUBBLE2;
-  const border = perfView==='down' ? COLOR_BUBBLE_BORDER : COLOR_BUBBLE2_BORDER;
-  perfChart = new Chart(ctx, {
-    type: 'bubble',
-    data: { datasets: [{ data: points, backgroundColor: color, borderColor: border, borderWidth: 1 }] },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      layout: { padding: 24 },
-      plugins: {
-        legend: { display:false },
-        tooltip: { callbacks: {
-          label: (c)=>{
-            const p = c.raw;
-            const subsTxt = p.subs===null ? '订阅数缺失' : ('订阅数 '+p.subs);
-            return [
-              p.label+'：投放 '+p.count+'条',
-              'CPA '+(p.cpa===null?'—':p.cpa)+' · CTR '+p.ctr+'%',
-              subsTxt+' · 通过率 '+p.passRate+'% · 爆款率 '+p.viralRate+'%'
-            ];
-          }
-        }},
-        datalabels: {
-          color: '#52514e', font:{size:10}, align:'top', anchor:'center',
-          formatter: (v) => v.label
-        }
-      },
-      scales: {
-        x: { title:{display:true,text: perfView==='down' ? 'CPA 均值 (越低越好 →左)' : 'CTR 均值 %'}, grid:{color:'#e1e0d9'}, ticks:{color:'#898781'} },
-        y: { title:{display:true,text: perfView==='down' ? '爆款率 %' : '通过率 %'}, grid:{color:'#e1e0d9'}, ticks:{color:'#898781'} }
-      }
-    },
-    plugins: [ChartDataLabels]
-  });
-
-  const sorted = rows.slice().sort((a,b)=> (perfView==='down'?b[5]-a[5]:b[4]-a[4])).slice(0,3);
-  const label = perfView==='down' ? '爆款率' : '通过率';
-  document.getElementById('perfTop').innerHTML = '<p class="note" style="margin-bottom:2px">'+label+'最高的三个标签</p>' +
-    sorted.map(r=>'<div class="item"><span>'+r[0]+'</span><span>'+
-      (perfView==='down' ? ('CPA '+r[1]+' · 爆款率 '+r[5]+'%') : ('CTR '+r[2]+'% · 通过率 '+r[4]+'%'))
-      +' · '+r[6]+'条</span></div>').join('');
-}
-
-function switchDim(dim) {
-  Array.from(tabsEl.children).forEach(b=>{
-    b.classList.toggle('active', b.dataset.dim === dim);
-  });
-  renderComp(dim);
-  renderPerf(dim);
-}
-
-switchDim(dims[0]);
-</script>
+    const colors=['#ffd21e','#9a75ff','#59d4a2','#66a5ff','#ff7561','#e1b650','#7acdd7','#8e8e8e','#d58ee8','#6ba478','#db816f','#a7b5ff'];
+    const metrics={subs:{label:'订阅数',suffix:'',color:'#ffd21e'},ctr:{label:'CTR',suffix:'%',color:'#59d4a2'},pass:{label:'通过率',suffix:'%',color:'#66a5ff'},hit:{label:'爆款率',suffix:'%',color:'#ff7561'}};
+    let activeDimension='industry', activeMetric='ctr';
+    const fmt=n=>Number.isInteger(n)?n.toLocaleString():n.toFixed(2);
+    function renderOverview(){ const root=document.getElementById('overview-bars'); root.innerHTML=overview.map(d=>{const max=Math.max(d.old,d.new); return `<div class="compare-row"><span class="compare-name">${d.name}</span><div class="bar-track" aria-label="${d.name}：6月${d.format(d.old)}，7月${d.format(d.new)}"><span class="bar-old" style="width:${d.old/max*100}%"></span><span class="bar-new" style="width:${d.new/max*100}%"></span></div><span class="compare-value">${d.format(d.old)} → <b>${d.format(d.new)}</b><br><span style="color:${d.delta.startsWith('-')?'#59d4a2':'#ffd21e'}">${d.delta}</span></span></div>`}).join(''); }
+    function arc(cx,cy,r,start,end){const p=a=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];const [x1,y1]=p(start),[x2,y2]=p(end);const large=end-start>Math.PI?1:0;return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;}
+    function renderShareOverview(){const root=document.getElementById('share-grid');root.innerHTML=Object.values(shares).map((data,cardIndex)=>{const total=data.items.reduce((sum,item)=>sum+item[1],0);let start=-Math.PI/2;let slices='';data.items.forEach(([label,value],i)=>{const end=start+Math.PI*2*value/total;slices+=`<path d="${arc(75,75,65,start,end)}" fill="${colors[i%colors.length]}" stroke="#111" stroke-width="2"><title>${label} ${value}，${(value/total*100).toFixed(1)}%</title></path>`;start=end;});const top=data.items.reduce((a,b)=>a[1]>b[1]?a:b);return `<article class="share-card"><h3>${data.name}</h3><p>${total} 个标签</p><svg viewBox="0 0 150 150" role="img" aria-label="${data.name}标签占比">${slices}<circle cx="75" cy="75" r="38" fill="#111"></circle><text x="75" y="72" text-anchor="middle" fill="#f4f4f1" font-size="20" font-weight="700">${total}</text><text x="75" y="90" text-anchor="middle" fill="#a6a6a6" font-size="9">标签</text></svg><p class="share-caption">最高：${top[0]} ${(top[1]/total*100).toFixed(1)}%</p></article>`;}).join('');}
+    function renderShare(){const data=shares[activeDimension],total=data.items.reduce((s,x)=>s+x[1],0),svg=document.getElementById('donut'),legend=document.getElementById('legend');let start=-Math.PI/2;svg.innerHTML=`<circle cx="125" cy="125" r="82" fill="#101010" stroke="#303030" stroke-width="1"></circle><text x="125" y="118" text-anchor="middle" fill="#f4f4f1" font-size="30" font-weight="700">${total}</text><text x="125" y="141" text-anchor="middle" fill="#a6a6a6" font-size="12">标签总数</text>`;data.items.forEach(([label,value],i)=>{const end=start+Math.PI*2*value/total;const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',arc(125,125,112,start,end));path.setAttribute('fill',colors[i%colors.length]);path.setAttribute('stroke','#090909');path.setAttribute('stroke-width','2');path.setAttribute('tabindex','0');path.setAttribute('role','img');path.setAttribute('aria-label',`${label} ${value} 条，占 ${(value/total*100).toFixed(1)}%`);path.addEventListener('mouseenter',()=>showShareDetail(label,value,total));path.addEventListener('focus',()=>showShareDetail(label,value,total));svg.appendChild(path);start=end;});legend.innerHTML=data.items.map(([label,value],i)=>`<button class="legend-item" data-label="${label}"><span class="dot" style="background:${colors[i%colors.length]}"></span><span>${label}</span><span class="legend-value">${value} / ${(value/total*100).toFixed(1)}%</span></button>`).join('');legend.querySelectorAll('button').forEach(b=>b.addEventListener('mouseenter',()=>{const item=data.items.find(x=>x[0]===b.dataset.label);showShareDetail(item[0],item[1],total)}));document.getElementById('dashboard-title').textContent=data.name+'表现';document.getElementById('dashboard-desc').textContent=data.note;}
+    function showShareDetail(label,value,total){const p=shares[activeDimension].performance?.[label];document.getElementById('hover-detail').innerHTML=p?`<b>${label}</b>：${value} 个标签，占 ${(value/total*100).toFixed(1)}%。订阅 ${fmt(p.subs)}；CTR ${fmt(p.ctr)}%；通过率 ${fmt(p.pass)}%；爆款率 ${fmt(p.hit)}%。`:`<b>${label}</b>：${value} 个标签，占 ${(value/total*100).toFixed(1)}%。该维度以构成分布呈现。`;}
+    function renderDashboard(){const p=shares[activeDimension].performance,buttons=document.getElementById('metric-toggle'),chart=document.getElementById('bar-chart');buttons.innerHTML=Object.entries(metrics).map(([key,v])=>`<button type="button" data-metric="${key}" aria-pressed="${key===activeMetric}">${v.label}</button>`).join('');buttons.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{activeMetric=b.dataset.metric;renderDashboard();}));if(!p){chart.innerHTML='<div class="hover-detail">该维度已纳入 T1 标签构成；原始资料未给出逐标签绩效图，建议在 V1.5 增加交叉维度分析。</div>';return;}const rows=Object.entries(p).sort((a,b)=>b[1][activeMetric]-a[1][activeMetric]);const max=Math.max(...rows.map(x=>x[1][activeMetric]),1);const m=metrics[activeMetric];chart.innerHTML=rows.map(([label,v])=>`<div class="chart-row" tabindex="0" data-label="${label}"><span class="chart-label">${label}</span><div class="chart-track"><div class="chart-bar" style="width:${v[activeMetric]/max*100}%;background:${m.color}"></div></div><span class="chart-value">${fmt(v[activeMetric])}${m.suffix}</span></div>`).join('');chart.querySelectorAll('.chart-row').forEach(r=>{const f=()=>{const v=p[r.dataset.label];document.getElementById('hover-detail').innerHTML=`<b>${r.dataset.label}</b>：订阅 ${fmt(v.subs)}；CTR ${fmt(v.ctr)}%；通过率 ${fmt(v.pass)}%；爆款率 ${fmt(v.hit)}%。`;};r.addEventListener('mouseenter',f);r.addEventListener('focus',f);});}
+    function renderTabs(){const tabs=document.getElementById('share-tabs');tabs.innerHTML=Object.entries(shares).map(([key,v])=>`<button type="button" class="tab" role="tab" aria-selected="${key===activeDimension}" data-dimension="${key}">${v.name}</button>`).join('');tabs.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{activeDimension=b.dataset.dimension;renderTabs();renderShare();renderDashboard();}));}
+    function openMedia(card){const content=document.getElementById('modal-content');const type=card.dataset.type,src=card.dataset.src;content.innerHTML=type==='video'?`<video class="modal-media" controls autoplay><source src="${src}"></video>`:`<img class="modal-media" src="${src}" alt="素材案例">`;document.getElementById('modal-caption').textContent=card.dataset.caption;document.getElementById('modal').classList.add('open');document.getElementById('modal-close').focus();}
+    function closeMedia(){const content=document.getElementById('modal-content');content.querySelectorAll('video').forEach(video=>{video.pause();video.removeAttribute('src');video.load();});content.replaceChildren();document.getElementById('modal-caption').textContent='';document.getElementById('modal').classList.remove('open');}
+    document.querySelectorAll('.media-card').forEach(c=>c.addEventListener('click',()=>openMedia(c)));document.getElementById('modal-close').addEventListener('click',closeMedia);document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeMedia()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMedia()});
+    renderOverview();renderShareOverview();renderTabs();renderShare();renderDashboard();
+  </script>
 </body>
 </html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外广告素材标签看板</title>
+<style>
+  :root{
+    --surface-2:#ffffff; --surface-1:#f7f6f3; --surface-0:#f1efe8;
+    --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#898781;
+    --border:#e1e0d9; --border-strong:#c3c2b7; --border-accent:#2a78d6;
+    --bg-accent:#e6f1fb; --text-accent:#185fa5; --radius:8px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-2:#1a1a19; --surface-1:#242422; --surface-0:#141413;
+      --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#898781;
+      --border:#2c2c2a; --border-strong:#383835; --border-accent:#3987e5;
+      --bg-accent:#0c447c; --text-accent:#b5d4f4;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:24px; background:var(--surface-0); color:var(--text-primary);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+    max-width:760px; margin:0 auto;
+  }
+  h1{font-size:20px;font-weight:500;margin:0 0 4px;}
+  .subtitle{font-size:13px;color:var(--text-muted);margin:0 0 24px;}
+  .card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;}
+  button{
+    padding:6px 14px;font-size:13px;border-radius:var(--radius);border:0.5px solid var(--border-strong);
+    background:transparent;color:var(--text-primary);cursor:pointer;font-family:inherit;
+  }
+  button.active{border-color:var(--border-accent);background:var(--bg-accent);color:var(--text-accent);}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem;}
+  .section-title{font-size:14px;color:var(--text-secondary);margin:0;}
+  .note{font-size:12px;color:var(--text-muted);margin:0 0 8px;}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--text-secondary);margin-top:8px;}
+  .legend span{display:flex;align-items:center;gap:4px;}
+  .dot{width:10px;height:10px;border-radius:2px;}
+  .chart-wrap{position:relative;width:100%;height:360px;}
+  .top3{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+  .top3 .item{display:flex;justify-content:space-between;font-size:13px;padding:6px 10px;background:var(--surface-1);border-radius:var(--radius);}
+  .top3 .item span:last-child{color:var(--text-secondary);}
+  .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:12px;flex-wrap:wrap;}
+  .toolbar .row{margin:0;gap:6px;}
+  .toolbar button{padding:4px 10px;font-size:12px;}
+  footer{font-size:12px;color:var(--text-muted);text-align:center;margin-top:1rem;}
+</style>
+</head>
+<body>
+
+<h1>海外广告素材标签占比与投放效果看板</h1>
+<p class="subtitle">Tripo 自投素材 · 5 个标签维度：行业 / 卖点 / 内容 / 模式 / 风格</p>
+
+<div class="row" id="tabs"></div>
+
+<div class="card">
+  <div class="toolbar">
+    <p class="section-title">标签占比结构：7月新测达标 vs 历史累计</p>
+    <div class="row" id="modeToggle"></div>
+  </div>
+  <p class="note" id="modeNote"></p>
+  <div class="chart-wrap"><canvas id="compChart" role="img" aria-label="占比对比条形图"></canvas></div>
+  <div class="legend" id="compLegend"></div>
+</div>
+
+<div class="card">
+  <div class="toolbar">
+    <p class="section-title" id="perfTitle"></p>
+    <div class="row" id="perfToggle"></div>
+  </div>
+  <p class="note" id="perfNote"></p>
+  <div class="chart-wrap"><canvas id="perfChart" role="img" aria-label="效果气泡图"></canvas></div>
+  <div class="top3" id="perfTop"></div>
+</div>
+
+<footer>数据来源：7月测新达标 + 历史&amp;新素材统计 · 由 Claude 生成</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<script>
+// perf row: [name, cpa, ctrPct, subs(null=missing), passRatePct, viralRatePct, count]
+const DATA = {
+  "行业": {
+    newTotal:17, histTotal:125,
+    comp: [["3D打印",6,25],["家居",3,19],["电商",2,5],["游戏",2,18],["其他",2,47],["影视",1,5],["工业",1,2],["ARVR",0,4]],
+    perf: [
+      ["其他",175.2,0.66,1788,10.9,2.1,430],["家居",182.3,0.83,912,13.5,1.4,141],
+      ["3D打印",187.8,1.36,709,13.2,2.6,189],["游戏",194.0,1.11,635,10.2,3.6,167],
+      ["ARVR",192.7,0.50,236,6.7,0,60],["电商",214.1,0.76,222,7.5,0,67],
+      ["工业",222.5,0.68,153,8.7,4.3,23],["影视",212.6,0.83,116,10.2,0,49]
+    ]
+  },
+  "卖点": {
+    newTotal:17, histTotal:146,
+    comp: [["2Dto3D",7,40],["Txtto3D",3,8],["贴图",2,32],["生成精度",1,35],["SmartMesh",1,6],["批量",1,4],["生成速度",1,4],["绑骨",1,1],["拆件",0,7],["多视角",0,5],["综合",0,4],["工作流",0,0]],
+    perf: [
+      ["电商",128.3,0.49,104,22.2,0,9],["生成精度",173.3,0.68,996,15.5,3.5,226],
+      ["3D打印",187.8,1.36,709,13.2,2.6,189],["拆件",147.6,0.69,206,13.2,1.9,53],
+      ["贴图",186.3,0.65,1175,12.6,2.0,253],["2Dto3D",196.0,1.06,1263,12.1,2.4,330],
+      ["Txtto3D",174.4,0.95,262,12.1,1.5,66],["生成速度",209.7,0.80,175,11.1,8.3,36],
+      ["游戏场景",219.5,1.03,null,10.1,3.4,89],["绑骨",149.3,0.97,141,3.2,0,31],
+      ["工作流",246.2,0.50,226,0,0,54],["资产管理",null,0.47,0,0,0,4]
+    ]
+  },
+  "内容": {
+    newTotal:15, histTotal:123,
+    comp: [["装饰",4,7],["人物",4,36],["家居",3,19],["怪兽",1,10],["动物",1,5],["产品",1,4],["工业",1,2],["道具",0,17],["建筑",0,12],["风景",0,6],["机甲",0,3],["综合",0,2]],
+    perf: [
+      ["建筑",178.1,0.72,370,17.6,5.9,68],["装饰",216.5,1.58,195,16.7,0,42],
+      ["家居",182.3,0.83,912,13.5,1.4,141],["人物",157.4,0.97,882,11.9,3.3,303],
+      ["动物",207.3,0.71,104,11.1,0,45],["综合",252.3,0.66,109,11.1,0,18],
+      ["饮食",196.6,0.89,45,10.5,0,19],["风景",227.1,0.60,224,10.2,0,59],
+      ["道具",188.3,0.67,972,9.8,1.7,174],["怪兽",185.6,1.04,558,9.0,1.8,111],
+      ["工业",222.5,0.68,153,8.7,4.3,23],["机甲",175.3,1.12,131,6.7,4.4,45],
+      ["产品",216.3,0.76,126,6.2,0,65],["交通",197.3,0.65,156,4.3,4.3,46]
+    ]
+  },
+  "模式": {
+    newTotal:23, histTotal:158,
+    comp: [["渲染",14,100],["白模",7,50],["线框",2,6],["法线",0,2]],
+    perf: [
+      ["渲染",187.2,0.86,3805,11.3,2.3,887],["白模",195.4,0.90,2075,10.5,2.5,475],
+      ["法线",225.0,0.70,86,9.1,4.5,22],["线框",191.5,1.26,337,7.5,2.5,80]
+    ]
+  },
+  "风格": {
+    newTotal:5, histTotal:51,
+    comp: [["现实",2,15],["卡通",2,10],["复古",1,18],["科幻",0,8]],
+    perf: [
+      ["现实",193.6,0.60,307,14.8,1.6,61],["卡通",213.8,1.61,117,11.6,4.7,43],
+      ["科幻",168.7,1.36,163,9.5,4.8,42],["复古",216.5,0.85,159,8.7,2.2,46],
+      ["奇幻",null,0.81,0,0,0,9]
+    ]
+  }
+};
+
+const dims = Object.keys(DATA);
+let mode = 'pct';
+let perfView = 'down';
+const tabsEl = document.getElementById('tabs');
+dims.forEach((d,i)=>{
+  const b = document.createElement('button');
+  b.textContent = d;
+  b.dataset.dim = d;
+  if (i===0) b.classList.add('active');
+  b.onclick = () => switchDim(d);
+  tabsEl.appendChild(b);
+});
+
+function mkToggle(container, options, getVal, setVal, onChange){
+  options.forEach(([val,label])=>{
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.dataset.val = val;
+    if (val===getVal()) b.classList.add('active');
+    b.onclick = () => { setVal(val); onChange(); refreshToggle(container, getVal); };
+    container.appendChild(b);
+  });
+}
+function refreshToggle(container, getVal){
+  Array.from(container.children).forEach(b=>{
+    b.classList.toggle('active', b.dataset.val === getVal());
+  });
+}
+
+const modeToggleEl = document.getElementById('modeToggle');
+mkToggle(modeToggleEl, [['pct','占比%'],['count','条数']], ()=>mode, (v)=>mode=v, ()=>renderComp(currentDim));
+
+const perfToggleEl = document.getElementById('perfToggle');
+mkToggle(perfToggleEl, [['up','上游 CTR→通过率'],['down','下游 CPA→爆款率']], ()=>perfView, (v)=>perfView=v, ()=>renderPerf(currentDim));
+
+let compChart, perfChart, currentDim;
+const COLOR_NEW = '#eb6834';
+const COLOR_HIST = '#898781';
+const COLOR_BUBBLE = 'rgba(42,120,214,0.55)';
+const COLOR_BUBBLE_BORDER = '#2a78d6';
+const COLOR_BUBBLE2 = 'rgba(29,158,117,0.55)';
+const COLOR_BUBBLE2_BORDER = '#0f6e56';
+
+function renderComp(dim) {
+  currentDim = dim;
+  const d = DATA[dim];
+  const rows = d.comp.map(r=>{
+    const pctNew = r[1]/d.newTotal*100;
+    const pctHist = r[2]/d.histTotal*100;
+    return { name:r[0], countNew:r[1], countHist:r[2], pctNew, pctHist };
+  }).sort((a,b)=> mode==='pct' ? b.pctNew-a.pctNew : b.countHist-a.countHist);
+
+  const labels = rows.map(r=>r.name);
+  const newVals = rows.map(r=> mode==='pct' ? +r.pctNew.toFixed(1) : r.countNew);
+  const histVals = rows.map(r=> mode==='pct' ? +r.pctHist.toFixed(1) : r.countHist);
+
+  document.getElementById('modeNote').textContent = mode==='pct'
+    ? '占比分别在"7月新测(n='+d.newTotal+')"与"历史(n='+d.histTotal+')"各自总量内计算，两期基数不同，条形长短代表标签在各自周期内的集中度，不代表绝对条数多少。'
+    : '此视图展示原始条数，历史累计基数更大，条形自然更长，用于核对占比视图背后的真实样本量。';
+
+  const ctx = document.getElementById('compChart');
+  if (compChart) compChart.destroy();
+  compChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: '7月新测', data: newVals, backgroundColor: COLOR_NEW, borderRadius: 4, barThickness: 12,
+        meta: rows.map(r=>({count:r.countNew, pct:r.pctNew})) },
+      { label: '历史累计', data: histVals, backgroundColor: COLOR_HIST, borderRadius: 4, barThickness: 12,
+        meta: rows.map(r=>({count:r.countHist, pct:r.pctHist})) }
+    ]},
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 60 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (c)=>{
+          const m = c.dataset.meta[c.dataIndex];
+          return c.dataset.label+'：'+m.count+'条，占比'+m.pct.toFixed(1)+'%';
+        }}},
+        datalabels: {
+          anchor: 'end', align: 'right', color: '#52514e', font:{size:11},
+          formatter: (val, ctx) => {
+            const m = ctx.dataset.meta[ctx.dataIndex];
+            return mode==='pct' ? (m.count+'条 '+m.pct.toFixed(1)+'%') : (m.pct.toFixed(1)+'%');
+          }
+        }
+      },
+      scales: {
+        x: { title:{display:true,text: mode==='pct' ? '占比 %' : '条数'}, grid:{color:'#e1e0d9'}, ticks:{color:'#898781'} },
+        y: { grid:{display:false}, ticks:{color:'#52514e',font:{size:12}} }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+  document.getElementById('compLegend').innerHTML =
+    '<span><span class="dot" style="background:'+COLOR_NEW+'"></span>7月新测</span>'+
+    '<span><span class="dot" style="background:'+COLOR_HIST+'"></span>历史累计</span>';
+}
+
+function renderPerf(dim) {
+  const all = DATA[dim].perf;
+  document.getElementById('perfTitle').textContent = perfView==='down'
+    ? '下游：CPA 均值 x 爆款率，气泡大小 = 投放条数'
+    : '上游：CTR 均值 x 通过率(达标率)，气泡大小 = 投放条数';
+  document.getElementById('perfNote').textContent = perfView==='down'
+    ? '花钱效率视角：左上角（CPA低、爆款率高）是值得加投的标签；订阅数、通过率见气泡悬浮提示。'
+    : '素材吸引力视角：右上角（CTR高、通过率高）是最容易过测试关的方向；订阅数见气泡悬浮提示。';
+
+  const rows = perfView==='down' ? all.filter(r=>r[1]!==null) : all;
+  const counts = rows.map(r=>r[6]);
+  const maxC = Math.max(...counts), minC = Math.min(...counts);
+  const scaleR = (c) => 6 + (Math.sqrt(c)-Math.sqrt(minC))/(Math.sqrt(maxC)-Math.sqrt(minC)||1) * 22;
+
+  const points = rows.map(r=>{
+    const [name,cpa,ctr,subs,passRate,viralRate,count] = r;
+    return {
+      x: perfView==='down' ? cpa : ctr,
+      y: perfView==='down' ? viralRate : passRate,
+      r: scaleR(count), label:name, cpa, ctr, subs, passRate, viralRate, count
+    };
+  });
+
+  const ctx = document.getElementById('perfChart');
+  if (perfChart) perfChart.destroy();
+  const color = perfView==='down' ? COLOR_BUBBLE : COLOR_BUBBLE2;
+  const border = perfView==='down' ? COLOR_BUBBLE_BORDER : COLOR_BUBBLE2_BORDER;
+  perfChart = new Chart(ctx, {
+    type: 'bubble',
+    data: { datasets: [{ data: points, backgroundColor: color, borderColor: border, borderWidth: 1 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: 24 },
+      plugins: {
+        legend: { display:false },
+        tooltip: { callbacks: {
+          label: (c)=>{
+            const p = c.raw;
+            const subsTxt = p.subs===null ? '订阅数缺失' : ('订阅数 '+p.subs);
+            return [
+              p.label+'：投放 '+p.count+'条',
+              'CPA '+(p.cpa===null?'—':p.cpa)+' · CTR '+p.ctr+'%',
+              subsTxt+' · 通过率 '+p.passRate+'% · 爆款率 '+p.viralRate+'%'
+            ];
+          }
+        }},
+        datalabels: {
+          color: '#52514e', font:{size:10}, align:'top', anchor:'center',
+          formatter: (v) => v.label
+        }
+      },
+      scales: {
+        x: { title:{display:true,text: perfView==='down' ? 'CPA 均值 (越低越好 →左)' : 'CTR 均值 %'}, grid:{color:'#e1e0d9'}, ticks:{color:'#898781'} },
+        y: { title:{display:true,text: perfView==='down' ? '爆款率 %' : '通过率 %'}, grid:{color:'#e1e0d9'}, ticks:{color:'#898781'} }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  const sorted = rows.slice().sort((a,b)=> (perfView==='down'?b[5]-a[5]:b[4]-a[4])).slice(0,3);
+  const label = perfView==='down' ? '爆款率' : '通过率';
+  document.getElementById('perfTop').innerHTML = '<p class="note" style="margin-bottom:2px">'+label+'最高的三个标签</p>' +
+    sorted.map(r=>'<div class="item"><span>'+r[0]+'</span><span>'+
+      (perfView==='down' ? ('CPA '+r[1]+' · 爆款率 '+r[5]+'%') : ('CTR '+r[2]+'% · 通过率 '+r[4]+'%'))
+      +' · '+r[6]+'条</span></div>').join('');
+}
+
+function switchDim(dim) {
+  Array.from(tabsEl.children).forEach(b=>{
+    b.classList.toggle('active', b.dataset.dim === dim);
+  });
+  renderComp(dim);
+  renderPerf(dim);
+}
+
+switchDim(dims[0]);
+</script>
+</body>
+</html>
